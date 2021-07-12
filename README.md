@@ -10,7 +10,7 @@ This project was developed by [Can Berkil](https://github.com/ihatecan), [Canber
 The Motivation to do a recommendation system is rooted in our lecture "[Applied Machine Learning Fundamentals](https://github.com/DaWe1992/Applied_ML_Fundamentals)" from 3. semester. In that lecture concepts and the mathematics behind different ML models were introduced. Especially recommendations were interesting for us, as we come in contact with recommendations on different video and streaming plattforms in our everyday lifes. We combined this passion for recommendations with our passion for animes and decided to do an Anime Recommendation Engine.
 
 ## Running the Code
-The code can be executed on [Google Colab](https://colab.research.google.com/github/PatchFramework/data-exploration-project/blob/main/data_exploration_anime_recommendation.ipynb) by running all the cells. Colab is recommendet, as it provides a uniform environment for every one, so the "it works on my machine" problem can be avoided.
+The recommended way to execute the code is via [Google Colab](https://colab.research.google.com/github/PatchFramework/data-exploration-project/blob/main/data_exploration_anime_recommendation.ipynb). You can execute all code cells in the Jupyter Notebook on Google Colab via "Runtime" -> "Run all" in the top left menu. Colab is the recommended way, as it provides a unified environment for every one, so the "it works on my machine" problem can be avoided.
 
 Alternatively:
 The code can be downloaded and run locally on a linux based system. The Linux environment is necessary, because bash commands are used to download the dataset and unzip it.
@@ -54,4 +54,20 @@ Model selection
 
 The basic principles of recommendation engines are examined in this section. Also it is argued why Matrix Factorization is a good fit for our use-case
 </li>
+  
+<li>
+Model Implementation
+  
+3 different models were implemented: 
+  <ol>
+    <li>Model 1 with vanilla tensorflow without helper functions for the matrix factorization step</li>
+    <li>Model 2 with the tensorflow submodule tensorflow-recommenders, that provides build in helper functions</li>
+    <li>Algorithm that uses cosine similarity implemented with scikit-learn</li>
+  </ol>
 
+Model 1 uses the tf.gradient_tape() function that can estimate gradients unfortunately this returned gradients of zero in our case. Therefore the model cannot be trained with gradient descent and doesn't work properly.
+  
+Model 2 uses tensorflow-recommenders classes that are spefically developed with recommendation systems in mind. They provide helper functions that can split a matrix into its factors. After tweaking hyperparameters like learning rate and changing the loss function the model didn't improve its accuracy.
+  
+The Algorithm uses the cosine similarity metric to determine how similar animes are, based on their name, type and genres. This code is an algorithm rather than a model, as it cannot be trained.
+</li>
